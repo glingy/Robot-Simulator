@@ -9,3 +9,8 @@ The goal of this project is to allow for some off-bot theoretical testing and la
  * Gamepad (With modifiable keybinds in the SettingsManager class)
  * OpModes (But only in the class Run in the package teamcode currently: support for unknown opModes to be added later)
  * Primitive Sensors coming soon... (whenever I get around to it)
+ 
+## Setup:
+ * Open as Android Studio project and modify the teamcode.Run class to your liking.
+ * Click Run (It will call the configuration MainGUI, that's the right one)
+ * Look at the window that appears and ignore the console debug output.
