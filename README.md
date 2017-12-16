@@ -8,9 +8,23 @@ The goal of this project is to allow for some off-bot theoretical testing and la
  * Telemetry (Shows telemetry output to main window)
  * Gamepad (With modifiable keybinds in the SettingsManager class)
  * OpModes (But only in the class Run in the package teamcode currently: support for unknown opModes to be added later)
- * Primitive Sensors coming soon... (whenever I get around to it)
+ * Light Sensor (With random maximum light because I don't know what the real max is)
+ * Addition of more custom hardware devices
  
 ## Setup:
  * Open as Android Studio project and modify the teamcode.Run class to your liking.
  * Click Run (It will call the configuration MainGUI, that's the right one)
  * Look at the window that appears and ignore the console debug output.
+
+## Creating Custom HardwareDevices:
+ * Extend class HardwareDevice (with the existing naming convention) and implement the update() function as public.
+ * Call super in constructor with the specifications for your sensor
+ * Add your sensor to the main device list (MainGUI.devices.put(*name*, *device*)) to add to the update loop
+ * Make an interface (with the existing naming convention) that is the same name as the FTC one (if there is a corresponding device)
+ * In the hardwareMap class, duplicate an existing class and rename the classes to what you have named yours.
+ * The new hardware device should be good to go. Use in an opMode as shown in the example to create an instance.
+
+## TODO:
+ * Reorganize so the gui package isn't so cluttered and rename that package as well
+ * Implement gamepad joystick
+ * Add a servo

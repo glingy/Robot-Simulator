@@ -1,6 +1,7 @@
 package teamcode;
 
 import gui.DcMotor;
+import gui.LightSensor;
 import gui.OpMode;
 import gui.TeleOp;
 
@@ -14,6 +15,7 @@ public class Run extends OpMode {
     private DcMotor m2;
     private DcMotor m3;
     private DcMotor m4;
+    private LightSensor l1;
 
     public Run() {
         super();
@@ -25,6 +27,7 @@ public class Run extends OpMode {
         m2 = hardwareMap.dcMotor.get("Test");
         m3 = hardwareMap.dcMotor.get("Look");
         m4 = hardwareMap.dcMotor.get("Helloo");
+        l1 = hardwareMap.lightSensor.get("SensorTest");
 
         telemetry.addLine("Hello! Initialized...");
 
@@ -56,6 +59,7 @@ public class Run extends OpMode {
         telemetry.addData("Gamepad B", gamepad1.b);
         telemetry.addData("Gamepad X", gamepad1.x);
         telemetry.addData("Gamepad Y", gamepad1.y);
+        telemetry.addLine("Light Sensor: " + l1.getLightDetected());
         telemetry.update();
     }
 

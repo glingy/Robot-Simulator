@@ -10,7 +10,10 @@ public interface DcMotor {
     void setTargetPosition(int position);
     int getCurrentPosition();
     void setMode(DcMotorImpl.RunMode mode);
+    RunMode getMode();
     void resetDeviceConfigurationForOpMode();
+    void setZeroPowerBehavior(ZeroPowerBehavior zeroPowerBehavior);
+    ZeroPowerBehavior getZeroPowerBehavoir();
 
     enum ZeroPowerBehavior {
         UNKNOWN,
@@ -33,5 +36,7 @@ public interface DcMotor {
             return this == FORWARD? 1 : -1;
         }
     }
+
+
 
 }

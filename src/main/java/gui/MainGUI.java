@@ -4,6 +4,8 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,6 +24,7 @@ public class MainGUI extends JFrame {
     static TelemetryImpl telemetry;
     static SettingsManager settings = new SettingsManager();
     static GamepadController gamepad1 = new GamepadController(settings.Gamepad1);
+    static Map<String, HardwareDevice> devices = new HashMap<>();
     Timer timer;
     TimerTask timerTask;
     Boolean running = false;
@@ -67,7 +70,7 @@ public class MainGUI extends JFrame {
             public void run() {
                 if (running) {
                     code.loop();
-                    DcMotorImpl.loop();
+                    for (HardwareDevice d: devices.values()) d.update();
                 }
             }
         };

@@ -6,13 +6,21 @@ package gui;
 
 public class HardwareMap {
     public class DcMotorC {
-        public DcMotorImpl get(String name) {
-            if (DcMotorImpl.motors.containsKey(name))
-                return DcMotorImpl.motors.get(name);
+        public DcMotor get(String name) {
+            if (DcMotorImpl.devices.containsKey(name))
+                return (DcMotor) DcMotorImpl.devices.get(name);
             return new DcMotorImpl(name);
-
         }
     }
 
+    public class LightSensorC {
+        public LightSensor get(String name) {
+            if (LightSensorImpl.devices.containsKey(name))
+                return (LightSensor) LightSensorImpl.devices.get(name);
+            return new LightSensorImpl(name);
+        }
+    }
+
+    public LightSensorC lightSensor = new LightSensorC();
     public DcMotorC dcMotor = new DcMotorC();
 }
