@@ -13,14 +13,14 @@ public class LightSensorImpl extends HardwareDevice implements LightSensor, Chan
     private boolean led = false;
 
     public void stateChanged(ChangeEvent changeEvent) {
-        labels[0].setText(sliders[0].getValue() + "%");
-        value = sliders[0].getValue()/100d;
+        sliders[0].label.setText(String.format("Intensity: %d%%", sliders[0].slider.getValue()));
+        value = sliders[0].slider.getValue()/100d;
     }
 
     public LightSensorImpl(String name) {
-        super("Light Sensor", name, 2, 1);
-        sliders[0].setValue(0);
-        labels[0].setText("0%");
+        super("Light Sensor", name, 1, 1);
+        sliders[0].slider.setValue(0);
+        sliders[0].label.setText("Intensity: 0%");
         enableLed(true);
     }
 
@@ -40,10 +40,10 @@ public class LightSensorImpl extends HardwareDevice implements LightSensor, Chan
 
     public void enableLed(boolean enable) {
         led = enable;
-        labels[1].setText(led ? "Light On" : "Light Off");
+        labels[0].setText(led ? "Light On" : "Light Off");
     }
 
     public String status() {
-        return String.format("LED: %s, Light Percentage: %d%", led? "ON" : "OFF", (int)(value * 100));
+        return String.format("LED: %s, Light Percentage: %d%%", led? "ON" : "OFF", (int)(value * 100));
     }
 }

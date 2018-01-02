@@ -28,11 +28,10 @@ public class DcMotorImpl extends HardwareDevice implements DcMotor {
 
     public DcMotorImpl(String name) {
         super("DcMotor", name, 3, 0);
-        devices.put(name, this);
-        
-        labels[POWER].setText("Power: 0%");
-        labels[POSITION].setText("Current Position: 0");
-        labels[TARGET_POSITION].setText("Target Position: 0");
+
+        labels[POWER].setText(String.format("Power: %.1f%%", speed * 100));
+        labels[POSITION].setText(String.format("Current Position: %.0f", pos));
+        labels[TARGET_POSITION].setText(String.format("Target Position: %d", targPos));
     }
     public void update() {
         if (mode == RunMode.RUN_WITHOUT_ENCODER || mode == RunMode.RUN_USING_ENCODER) {
@@ -45,17 +44,17 @@ public class DcMotorImpl extends HardwareDevice implements DcMotor {
                 pos = targPos;
             }
         }
-        labels[POSITION].setText("Current Position: " + (int)pos + "");
+        labels[POSITION].setText(String.format("Current Position: %.0f", pos));
     }
 
     public void setPower(double power) {
         speed = Math.min(Math.max(power, -1), 1);
-        labels[POWER].setText("Speed: " + speed * 100 + "%");
+        labels[POWER].setText(String.format("Power: %.1f%%", speed * 100));
     }
 
     public void setTargetPosition(int position) {
         targPos = position;
-        labels[TARGET_POSITION].setText("Target Position: " + targPos + "");
+        labels[TARGET_POSITION].setText(String.format("Target Position: %d", targPos));
     }
 
     public int getCurrentPosition() {
@@ -82,7 +81,7 @@ public class DcMotorImpl extends HardwareDevice implements DcMotor {
         this.zeroPowerBehavior = zeroPowerBehavior;
     }
 
-    public ZeroPowerBehavior getZeroPowerBehavoir() {
+    public ZeroPowerBehavior getZeroPowerBehavior() {
         return zeroPowerBehavior;
     }
 }

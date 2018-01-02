@@ -18,6 +18,6 @@ public class SettingsManager {
         Gamepad1.a = 'a';
         Gamepad1.b = 'b';
         Gamepad1.x = 'x';
-        Gamepad1.y = 's';
+        Gamepad1.y = 'y';
     }
 }

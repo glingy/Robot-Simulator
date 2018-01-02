@@ -13,7 +13,7 @@ public interface DcMotor {
     RunMode getMode();
     void resetDeviceConfigurationForOpMode();
     void setZeroPowerBehavior(ZeroPowerBehavior zeroPowerBehavior);
-    ZeroPowerBehavior getZeroPowerBehavoir();
+    ZeroPowerBehavior getZeroPowerBehavior();
 
     enum ZeroPowerBehavior {
         UNKNOWN,

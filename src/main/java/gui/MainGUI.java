@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.Container;
-import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -19,7 +21,7 @@ import teamcode.Run;
 import teamcode.SettingsManager;
 
 public class MainGUI extends JFrame {
-    static GridLayout ifacesLayout = new GridLayout();
+    static GridBagLayout ifacesLayout = new GridBagLayout();
     static JPanel ifaces;
     static TelemetryImpl telemetry;
     static SettingsManager settings = new SettingsManager();
@@ -82,7 +84,31 @@ public class MainGUI extends JFrame {
                 timer.cancel();
             }
         });
+
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(gamepad1);
+    }
+
+    public static void resize() {
+        System.out.println("Resizing");
+        int count = devices.size();
+        int width = (int)Math.sqrt(count - 1) + 1;
+        int height = (count - 1)/width + 1;
+        int x = 0;
+        int y = 0;
+        for (HardwareDevice d : devices.values()) {
+            GridBagConstraints c = ifacesLayout.getConstraints(d);
+            if (x == width) {
+                x = 0;
+                y++;
+            }
+            System.out.println(x);
+            c.gridx = x;
+            c.gridy = y;
+            ifacesLayout.setConstraints(d, c);
+            x++;
+        }
+        ifaces.setMinimumSize(new Dimension(width * 200, height * 200));
+        mainGUI.setMinimumSize(new Dimension(width * 200, height * 200 + 125));
     }
 
 

@@ -1,6 +1,9 @@
 package gui;
 
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,24 +14,33 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.LabelUI;
+import javax.swing.text.JTextComponent;
 
 /**
  * Created by gregory.ling on 12/15/17.
  */
 
 public abstract class HardwareDevice extends JPanel {
-    public static Map<String, HardwareDevice> devices = new HashMap<>();
-
-    private int index;
     protected JLabel labels[];
-    protected JSlider sliders[];
+    protected Slider sliders[];
     public HardwareDevice(String deviceName, String instanceName, int labelCount, int sliderCount) {
         labels = new JLabel[labelCount];
-        sliders = new JSlider[sliderCount];
+        sliders = new Slider[sliderCount];
+        setBorder(new TitledBorder(String.format("%s (%s):", deviceName, instanceName)));
+        GridLayout layout = new GridLayout(labelCount + (2 * sliderCount), 1);
+        setLayout(layout);
+        setPreferredSize(new Dimension(200, 200));
 
-        index = devices.size();
-        setBorder(new TitledBorder(String.format("%s %d (%s):", deviceName, index, instanceName)));
-        setLayout(new GridLayout(labelCount + sliderCount, 1));
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.ipadx = 0;
+        constraints.ipady = 0;
+        constraints.weighty = 0.5;
+        constraints.weightx = 0.5;
+        constraints.gridx = 1;
+        constraints.gridy = 1;
 
         for (int i = 0; i < labels.length; i++) {
             labels[i] = new JLabel();
@@ -37,31 +49,20 @@ public abstract class HardwareDevice extends JPanel {
         }
 
         for (int i = 0; i < sliders.length; i++) {
-            sliders[i] = new JSlider();
-            sliders[i].setMinimum(0);
-            sliders[i].setMaximum(100);
-            if (this instanceof ChangeListener)
-                sliders[i].addChangeListener((ChangeListener) this);
-            add(sliders[i]);
+            sliders[i] = new Slider(this);
+            add(sliders[i].label);
+            add(sliders[i].slider);
         }
 
 
-        System.out.println(MainGUI.ifacesLayout.getColumns());
-        System.out.println(MainGUI.ifacesLayout.getRows());
         System.out.println(MainGUI.mainGUI.getWidth());
         System.out.println(MainGUI.mainGUI.getHeight());
         System.out.println(MainGUI.ifaces.getComponentCount());
 
-        if (MainGUI.ifacesLayout.getColumns() == 0) {
-            System.out.println("Column Zero");
-            MainGUI.ifacesLayout.setColumns(1);
-        } else if (MainGUI.ifacesLayout.getRows() == 0){
-            System.out.println("Row Zero");
-            MainGUI.ifacesLayout.setRows(1);
-        } else if (MainGUI.ifacesLayout.getColumns() * MainGUI.ifacesLayout.getRows() > MainGUI.ifaces.getComponentCount()) {
+        /*if ((MainGUI.ifaces.getHeight() / 200) * (MainGUI.ifaces.getWidth() / 200) > MainGUI.ifaces.getComponentCount()) {
         } else if (MainGUI.mainGUI.getHeight() - 100 >= ((MainGUI.ifacesLayout.getRows() + 1) * 200)){
             System.out.println("Row increase");
-            MainGUI.ifacesLayout.setRows(MainGUI.ifacesLayout.getRows() + 1);
+            constraints.gridx =
         } else if ((MainGUI.mainGUI.getWidth() >= (MainGUI.ifacesLayout.getColumns() + 1) * 200) || (2 * (MainGUI.mainGUI.getHeight() - 100) >= (MainGUI.mainGUI.getWidth()))) {
             System.out.println("Column increase");
             MainGUI.ifacesLayout.setColumns(MainGUI.ifacesLayout.getColumns() + 1);
@@ -70,12 +71,14 @@ public abstract class HardwareDevice extends JPanel {
             MainGUI.ifacesLayout.setRows(MainGUI.ifacesLayout.getRows() + 1);
         }
 
-        MainGUI.ifaces.add(this);
-        MainGUI.devices.put(instanceName, this);
-        MainGUI.mainGUI.setMinimumSize(new Dimension(MainGUI.ifacesLayout.getColumns() * 200, (MainGUI.ifacesLayout.getRows() * 200) + 100));
 
-        System.out.println(MainGUI.ifacesLayout.getColumns());
-        System.out.println(MainGUI.ifacesLayout.getRows());
+
+        MainGUI.mainGUI.setMinimumSize(new Dimension(MainGUI.ifacesLayout.getColumns() * 200, (MainGUI.ifacesLayout.getRows() * 200) + 100));
+*/
+
+        MainGUI.ifaces.add(this, constraints);
+        MainGUI.devices.put(instanceName, this);
+        MainGUI.resize();
         System.out.println(MainGUI.mainGUI.getWidth());
         System.out.println(MainGUI.mainGUI.getHeight());
         System.out.println(MainGUI.ifaces.getComponentCount());

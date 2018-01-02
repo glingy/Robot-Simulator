@@ -1,8 +1,10 @@
 package teamcode;
 
+import gui.CRServo;
 import gui.DcMotor;
 import gui.LightSensor;
 import gui.OpMode;
+import gui.Servo;
 import gui.TeleOp;
 
 /**
@@ -16,6 +18,8 @@ public class Run extends OpMode {
     private DcMotor m3;
     private DcMotor m4;
     private LightSensor l1;
+    private Servo s1;
+    private CRServo s2;
 
     public Run() {
         super();
@@ -28,6 +32,8 @@ public class Run extends OpMode {
         m3 = hardwareMap.dcMotor.get("Look");
         m4 = hardwareMap.dcMotor.get("Helloo");
         l1 = hardwareMap.lightSensor.get("SensorTest");
+        s1 = hardwareMap.servo.get("Servo!");
+        s2 = hardwareMap.crservo.get("CRServo!");
 
         telemetry.addLine("Hello! Initialized...");
 
@@ -42,6 +48,8 @@ public class Run extends OpMode {
         m2.setTargetPosition(400);
         m3.setPower(0.5);
         m4.setPower(100);
+        s1.setPosition(0);
+        s2.setPower(0);
     }
 
     @Override
@@ -54,6 +62,9 @@ public class Run extends OpMode {
         telemetry.addData("Motor 1 Position", m.getCurrentPosition());
 
         m4.setPower(gamepad1.a ? 1 : -1);
+        m3.setPower(l1.getLightDetected());
+        s1.setPosition(l1.getLightDetected());
+        s2.setPower(l1.getLightDetected());
 
         telemetry.addData("Gamepad A", gamepad1.a);
         telemetry.addData("Gamepad B", gamepad1.b);
