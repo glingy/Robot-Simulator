@@ -1,4 +1,4 @@
-package gui;
+package Controller;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -17,8 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
-import teamcode.Run;
-import teamcode.SettingsManager;
+import Controller.Hardware.GamepadController;
+import Controller.Hardware.Implementations.TelemetryImpl;
+import Controller.LessonManager.LessonManager;
+import LessonExampleSolutions.*;
+import Teamcode.Run;
+import Teamcode.SettingsManager;
 
 public class MainGUI extends JFrame {
     static GridBagLayout ifacesLayout = new GridBagLayout();
@@ -26,7 +30,10 @@ public class MainGUI extends JFrame {
     static TelemetryImpl telemetry;
     static SettingsManager settings = new SettingsManager();
     static GamepadController gamepad1 = new GamepadController(settings.Gamepad1);
+    static GamepadController gamepad2 = new GamepadController(settings.Gamepad2);
     static Map<String, HardwareDevice> devices = new HashMap<>();
+    static HardwareMap hardwareMap = new HardwareMap();
+    static LessonManager lessonManager = new LessonManager();
     Timer timer;
     TimerTask timerTask;
     Boolean running = false;
@@ -62,10 +69,21 @@ public class MainGUI extends JFrame {
         setSize(600, 400);         // "super" JFrame sets initial size
         setVisible(true);
 
-        OpMode code = new Run();
+        OpMode code = new L3();//new Run();
         code.init();
         code.start();
 
+        if (code.LESSON != -1) {
+            if (lessonManager.Lessons.containsKey(code.LESSON)) {
+                if (lessonManager.Lessons.get(code.LESSON).test(code)) {
+                    System.out.println("Congratulations! You have passed Lesson " + code.LESSON + "!");
+                } else {
+                    System.out.println("Oops... Your code does not pass Lesson " + code.LESSON + "...");
+                }
+            } else {
+                System.out.println("Oops... This lesson does not exist...");
+            }
+        }
         timer = new Timer();
         timerTask = new TimerTask() {
             @Override
@@ -80,16 +98,21 @@ public class MainGUI extends JFrame {
         timer.schedule(timerTask, 0, 50);
         running = true;
         addWindowStateListener((windowEvent) -> {
+            System.out.println(windowEvent.toString());
             if (windowEvent.getNewState() == WindowEvent.WINDOW_CLOSING) {
+                System.out.println("OOPS");
+                code.stop();
                 timer.cancel();
             }
         });
 
+
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(gamepad1);
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(gamepad2);
     }
 
     public static void resize() {
-        System.out.println("Resizing");
+        //System.out.println("Resizing");
         int count = devices.size();
         int width = (int)Math.sqrt(count - 1) + 1;
         int height = (count - 1)/width + 1;
@@ -101,7 +124,7 @@ public class MainGUI extends JFrame {
                 x = 0;
                 y++;
             }
-            System.out.println(x);
+            //System.out.println(x);
             c.gridx = x;
             c.gridy = y;
             ifacesLayout.setConstraints(d, c);

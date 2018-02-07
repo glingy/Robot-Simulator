@@ -1,30 +1,23 @@
-package gui;
+package Controller.Hardware.Implementations;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
+import Controller.Hardware.DcMotor;
+import Controller.HardwareDevice;
 
 /**
  * Created by gregory.ling on 12/13/17.
  */
 
 public class DcMotorImpl extends HardwareDevice implements DcMotor {
-    private static final int POWER = 0;
-    private static final int POSITION = 1;
-    private static final int TARGET_POSITION = 2;
+    public static final int POWER = 0;
+    public static final int POSITION = 1;
+    public static final int TARGET_POSITION = 2;
 
-    private double speed = 0;
-    private double pos = 0;
-    private int targPos = 0;
-    private Direction direction = Direction.FORWARD;
-    private RunMode mode = RunMode.RUN_WITHOUT_ENCODER; // I don't know default mode...
-    private ZeroPowerBehavior zeroPowerBehavior = ZeroPowerBehavior.FLOAT;
+    public double speed = 0;
+    public double pos = 0;
+    public int targPos = 0;
+    public Direction direction = Direction.FORWARD;
+    public RunMode mode = RunMode.RUN_USING_ENCODER; // I don't know default mode...
+    public ZeroPowerBehavior zeroPowerBehavior = ZeroPowerBehavior.FLOAT;
 
     public DcMotorImpl(String name) {
         super("DcMotor", name, 3, 0);
@@ -83,5 +76,9 @@ public class DcMotorImpl extends HardwareDevice implements DcMotor {
 
     public ZeroPowerBehavior getZeroPowerBehavior() {
         return zeroPowerBehavior;
+    }
+
+    public double getPower() {
+        return this.speed;
     }
 }

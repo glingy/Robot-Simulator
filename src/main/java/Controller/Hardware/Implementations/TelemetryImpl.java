@@ -1,7 +1,8 @@
-package gui;
+package Controller.Hardware.Implementations;
 
 import javax.swing.JTextArea;
-import javax.swing.text.DefaultCaret;
+
+import Controller.Hardware.Telemetry;
 
 /**
  * Created by gregory.ling on 12/14/17.
@@ -9,6 +10,7 @@ import javax.swing.text.DefaultCaret;
 
 public class TelemetryImpl extends JTextArea implements Telemetry {
     String telemetryString = "";
+    public String displayedString = "";
 
     public TelemetryImpl() {
         super();
@@ -25,6 +27,7 @@ public class TelemetryImpl extends JTextArea implements Telemetry {
 
     public void update() {
         setText(telemetryString);
+        displayedString = telemetryString;
         telemetryString = "";
     }
 }

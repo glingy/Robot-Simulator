@@ -7,14 +7,14 @@ The goal of this project is to allow for some off-bot theoretical testing and la
  * DcMotor (Primitively, and with no physics or zeroPowerBehavior, but movement is shown)
  * Telemetry (Shows telemetry output to main window)
  * Gamepad (With modifiable keybinds in the SettingsManager class)
- * OpModes (But only in the class Run in the package teamcode currently: support for unknown opModes to be added later)
+ * OpModes (But only in the class Run in the package Teamcode currently: support for unknown opModes to be added later)
  * Light Sensor (With random maximum light because I don't know what the real max is)
  * Servo
  * CRServo
  * Addition of custom hardware devices
  
 ## Setup:
- * Open as Android Studio project and modify the teamcode.Run class.
+ * Open as Android Studio project and modify the Teamcode.Run class.
  * Click Run (It will call the configuration MainGUI, that's the right one)
  * Look at the window that appears and ignore the console debug output.
 
@@ -27,5 +27,5 @@ The goal of this project is to allow for some off-bot theoretical testing and la
  * The new hardware device should be good to go. Use in an opMode as shown in the example to create an instance of the device.
 
 ## TODO:
- * Reorganize so the gui package isn't so cluttered and rename that package as well
+ * Reorganize so the Controller package isn't so cluttered and rename that package as well
  * Implement gamepad joystick

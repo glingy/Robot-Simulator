@@ -1,7 +1,4 @@
-package gui;
-
-import java.util.HashMap;
-import java.util.Map;
+package Controller.Hardware;
 
 /**
  * Created by gregory.ling on 12/15/17.

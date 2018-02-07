@@ -1,4 +1,7 @@
-package gui;
+package Controller.Hardware.Implementations;
+
+import Controller.Hardware.CRServo;
+import Controller.HardwareDevice;
 
 /**
  * Created by gregory.ling on 1/2/18.

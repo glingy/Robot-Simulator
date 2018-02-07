@@ -1,4 +1,4 @@
-package gui;
+package Controller;
 
 import javax.swing.JLabel;
 import javax.swing.JSlider;

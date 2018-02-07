@@ -1,4 +1,6 @@
-package gui;
+package Controller.Hardware;
+
+import Controller.Hardware.Implementations.DcMotorImpl;
 
 /**
  * Created by gregory.ling on 12/14/17.
@@ -14,6 +16,7 @@ public interface DcMotor {
     void resetDeviceConfigurationForOpMode();
     void setZeroPowerBehavior(ZeroPowerBehavior zeroPowerBehavior);
     ZeroPowerBehavior getZeroPowerBehavior();
+    double getPower();
 
     enum ZeroPowerBehavior {
         UNKNOWN,
@@ -32,7 +35,7 @@ public interface DcMotor {
         FORWARD,
         REVERSE;
 
-        int value() {
+        public int value() {
             return this == FORWARD? 1 : -1;
         }
     }

@@ -1,4 +1,13 @@
-package gui;
+package Controller;
+
+import Controller.Hardware.CRServo;
+import Controller.Hardware.Implementations.CRServoImpl;
+import Controller.Hardware.DcMotor;
+import Controller.Hardware.Implementations.DcMotorImpl;
+import Controller.Hardware.LightSensor;
+import Controller.Hardware.Implementations.LightSensorImpl;
+import Controller.Hardware.Servo;
+import Controller.Hardware.Implementations.ServoImpl;
 
 /**
  * Created by gregory.ling on 12/14/17.

@@ -1,7 +1,10 @@
-package gui;
+package Controller.Hardware.Implementations;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import Controller.Hardware.LightSensor;
+import Controller.HardwareDevice;
 
 /**
  * Created by gregory.ling on 12/16/17.

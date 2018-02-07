@@ -1,21 +1,13 @@
-package gui;
+package Controller;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ChangeListener;
-import javax.swing.plaf.LabelUI;
-import javax.swing.text.JTextComponent;
 
 /**
  * Created by gregory.ling on 12/15/17.
@@ -54,11 +46,6 @@ public abstract class HardwareDevice extends JPanel {
             add(sliders[i].slider);
         }
 
-
-        System.out.println(MainGUI.mainGUI.getWidth());
-        System.out.println(MainGUI.mainGUI.getHeight());
-        System.out.println(MainGUI.ifaces.getComponentCount());
-
         /*if ((MainGUI.ifaces.getHeight() / 200) * (MainGUI.ifaces.getWidth() / 200) > MainGUI.ifaces.getComponentCount()) {
         } else if (MainGUI.mainGUI.getHeight() - 100 >= ((MainGUI.ifacesLayout.getRows() + 1) * 200)){
             System.out.println("Row increase");
@@ -79,11 +66,7 @@ public abstract class HardwareDevice extends JPanel {
         MainGUI.ifaces.add(this, constraints);
         MainGUI.devices.put(instanceName, this);
         MainGUI.resize();
-        System.out.println(MainGUI.mainGUI.getWidth());
-        System.out.println(MainGUI.mainGUI.getHeight());
-        System.out.println(MainGUI.ifaces.getComponentCount());
-        System.out.println("------------");
     }
 
-    abstract void update();
+    abstract public void update();
 }

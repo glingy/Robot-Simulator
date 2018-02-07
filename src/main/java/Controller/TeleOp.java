@@ -1,4 +1,4 @@
-package gui;
+package Controller;
 
 /**
  * Created by gregory.ling on 12/14/17.

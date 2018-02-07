@@ -1,4 +1,4 @@
-package gui;
+package Controller.Hardware;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;

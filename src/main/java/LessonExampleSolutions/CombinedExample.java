@@ -1,28 +1,31 @@
-package teamcode;
+package LessonExampleSolutions;
 
-import gui.CRServo;
-import gui.DcMotor;
-import gui.LightSensor;
-import gui.OpMode;
-import gui.Servo;
-import gui.TeleOp;
+import Controller.Hardware.CRServo;
+import Controller.Hardware.DcMotor;
+import Controller.Hardware.LightSensor;
+import Controller.Hardware.Servo;
+import Controller.OpMode;
+import Controller.TeleOp;
 
 /**
  * Created by gregory.ling on 12/14/17.
  */
 
 @TeleOp(name="Hello", group="Testing")
-public class Run extends OpMode {
+public class CombinedExample extends OpMode {
     private DcMotor m;
     private DcMotor m2;
     private DcMotor m3;
     private DcMotor m4;
+    private DcMotor m5;
     private LightSensor l1;
     private Servo s1;
     private CRServo s2;
 
-    public Run() {
+
+    public CombinedExample() {
         super();
+        LESSON = 1;
     }
 
     @Override
@@ -34,6 +37,7 @@ public class Run extends OpMode {
         l1 = hardwareMap.lightSensor.get("SensorTest");
         s1 = hardwareMap.servo.get("Servo!");
         s2 = hardwareMap.crservo.get("CRServo!");
+        m5 = hardwareMap.dcMotor.get("RunME");
 
         telemetry.addLine("Hello! Initialized...");
 
@@ -54,6 +58,7 @@ public class Run extends OpMode {
 
     @Override
     public void loop() {
+        m5.setPower(1);
         if (m.getCurrentPosition() > 100) {
             m.setDirection(DcMotor.Direction.REVERSE);
         } else if (m.getCurrentPosition() < -100){

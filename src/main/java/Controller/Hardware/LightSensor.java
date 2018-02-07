@@ -1,4 +1,4 @@
-package gui;
+package Controller.Hardware;
 
 /**
  * Created by gregory.ling on 12/16/17.
