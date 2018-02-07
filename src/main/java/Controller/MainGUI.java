@@ -27,7 +27,7 @@ import Teamcode.SettingsManager;
 public class MainGUI extends JFrame {
     static GridBagLayout ifacesLayout = new GridBagLayout();
     static JPanel ifaces;
-    static TelemetryImpl telemetry;
+    static TelemetryImpl telemetry = new TelemetryImpl();
     static SettingsManager settings = new SettingsManager();
     static GamepadController gamepad1 = new GamepadController(settings.Gamepad1);
     static GamepadController gamepad2 = new GamepadController(settings.Gamepad2);
@@ -45,8 +45,6 @@ public class MainGUI extends JFrame {
 
         ifaces = new JPanel();
         ifaces.setLayout(ifacesLayout);
-
-        telemetry = new TelemetryImpl();
 
         JScrollPane teleScroll = new JScrollPane(telemetry);
         teleScroll.setAutoscrolls(true);
@@ -69,7 +67,7 @@ public class MainGUI extends JFrame {
         setSize(600, 400);         // "super" JFrame sets initial size
         setVisible(true);
 
-        OpMode code = new L3();//new Run();
+        OpMode code = new Run();
         code.init();
         code.start();
 

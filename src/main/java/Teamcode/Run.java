@@ -12,7 +12,7 @@ public class Run extends OpMode {
 
     public Run() {
         super();
-        //LESSON = 0;  //Uncomment this line to check as lesson 0. Change number to check as a different lesson, or comment out to not check at all.
+        LESSON = 0;  //Uncomment this line to check as lesson 0. Change number to check as a different lesson, or comment out to not check at all.
     }
 
     // is run once on initialization
@@ -24,7 +24,8 @@ public class Run extends OpMode {
     //is run once when start button is pressed
     @Override
     public void start() {
-
+        telemetry.addLine("Yay FTC!");
+        telemetry.update();
     }
 
     //is run continuously after start button pressed

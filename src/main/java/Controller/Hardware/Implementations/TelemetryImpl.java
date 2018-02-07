@@ -18,11 +18,11 @@ public class TelemetryImpl extends JTextArea implements Telemetry {
     }
 
     public void addLine(String line) {
-        telemetryString += line + "\n";
+        telemetryString += (telemetryString.length() > 0 ? "\n" : "") + line;
     }
 
     public void addData(String name, Object data) {
-        telemetryString += name + ": " + data.toString() + "\n";
+        telemetryString += (telemetryString.length() > 0 ? "\n" : "") + name + ": " + data.toString();
     }
 
     public void update() {
