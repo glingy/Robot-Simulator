@@ -14,7 +14,7 @@ public class L2 extends Lesson {
     @Override
     public boolean test(OpMode code) {
         if (devices.containsKey("Main Motor") && devices.get("Main Motor") instanceof DcMotor) {
-            System.out.println("Stage 1 Passed: You initiailized a valid motor.");
+            System.out.println("Stage 1 Passed: You initialized a valid motor.");
             gamepad1.x = false;
             code.loop();
             if (((DcMotor) devices.get("Main Motor")).getPower() < 0) {

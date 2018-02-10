@@ -17,6 +17,7 @@ public interface DcMotor {
     void setZeroPowerBehavior(ZeroPowerBehavior zeroPowerBehavior);
     ZeroPowerBehavior getZeroPowerBehavior();
     double getPower();
+    int getTargetPosition();
 
     enum ZeroPowerBehavior {
         UNKNOWN,

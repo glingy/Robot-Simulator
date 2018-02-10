@@ -15,7 +15,7 @@ public class L3 extends Lesson {
     @Override
     public boolean test(OpMode code) {
         if (devices.containsKey("Main Motor") && devices.get("Main Motor") instanceof DcMotor) {
-            System.out.println("Stage 1 Passed: You initiailized a valid motor.");
+            System.out.println("Stage 1 Passed: You initialized a valid motor.");
             code.loop();
             if (((DcMotor) devices.get("Main Motor")).getPower() > 0) {
                 System.out.println("Stage 2 Passed: Your motor runs forwards at first.");

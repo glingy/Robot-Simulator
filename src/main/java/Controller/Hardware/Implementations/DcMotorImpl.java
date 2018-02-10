@@ -1,5 +1,7 @@
 package Controller.Hardware.Implementations;
 
+import java.util.Calendar;
+
 import Controller.Hardware.DcMotor;
 import Controller.HardwareDevice;
 
@@ -18,6 +20,7 @@ public class DcMotorImpl extends HardwareDevice implements DcMotor {
     public Direction direction = Direction.FORWARD;
     public RunMode mode = RunMode.RUN_USING_ENCODER; // I don't know default mode...
     public ZeroPowerBehavior zeroPowerBehavior = ZeroPowerBehavior.FLOAT;
+    private double lastTime = 0;
 
     public DcMotorImpl(String name) {
         super("DcMotor", name, 3, 0);
@@ -32,7 +35,7 @@ public class DcMotorImpl extends HardwareDevice implements DcMotor {
         } else if (mode == RunMode.STOP_AND_RESET_ENCODER) {
             pos = 0;
         } else if (mode == RunMode.RUN_TO_POSITION){
-            pos += Math.min(Math.max((targPos - pos)/10d, -1), 1) * Math.abs(speed);
+            pos += Math.min(Math.max((targPos - pos)/4d, -1), 1) * Math.abs(speed);
             if (Math.abs(pos - targPos) < 0.1) {
                 pos = targPos;
             }
@@ -73,6 +76,8 @@ public class DcMotorImpl extends HardwareDevice implements DcMotor {
     public void setZeroPowerBehavior(ZeroPowerBehavior zeroPowerBehavior) {
         this.zeroPowerBehavior = zeroPowerBehavior;
     }
+
+    public int getTargetPosition() { return targPos;}
 
     public ZeroPowerBehavior getZeroPowerBehavior() {
         return zeroPowerBehavior;

@@ -16,5 +16,7 @@ public class LessonManager {
         Lessons.put(1, new L1());
         Lessons.put(2, new L2());
         Lessons.put(3, new L3());
+        Lessons.put(4, new L4());
+        Lessons.put(5, new L5());
     }
 }

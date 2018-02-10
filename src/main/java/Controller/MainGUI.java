@@ -67,7 +67,7 @@ public class MainGUI extends JFrame {
         setSize(600, 400);         // "super" JFrame sets initial size
         setVisible(true);
 
-        OpMode code = new Run();
+        OpMode code = new L5();//new Run();
         code.init();
         code.start();
 
